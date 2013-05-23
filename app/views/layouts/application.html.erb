@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript">
+    $.ajaxSetup({
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+      }
+    });
+    </script>
+    <title>Team1TrainingShopping</title>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>  
+  </head>
+  <body>
+    <div id="wrap">
+      <center>
+        <div id="error_explanation">
+          <div class="alert alert-error">
+            <% flash.each do | key , value | %>
+              <%= value %>
+            <% end %>
+          </div>
+        </div>
+      </center>
+      <%= yield %>
+    </div>
+  </body>
+</html>
