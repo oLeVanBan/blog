@@ -1,4 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if IE]><script type="text/javascript" src="/js/excanvas.js"></script><![endif]--> 
+<script type="text/javascript" src="/js/coolclock.js"></script>
+<script type="text/javascript" src="/js/moreskins.js"></script>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -6,8 +9,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
     <script src="jqbanner.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="jqbanner.css" />
+    
   </head>
-  <body>
+  <body onload="CoolClock.findAndCreateClocks()">
   <div id="wrap">
 
     <div id="contentsArea">
@@ -30,12 +34,24 @@
 
       </div>
     </center>
-<div class="contentsLayout-2c_left">
-  <div class="subColumn">
-  <%= render 'layouts/left_colum' %>
-</div>
-</div>
-</div>
+        
+    <div class="contentsLayout-2c_left">
+        <div class="subColumn">
+        <%= render 'layouts/left_colum' %>
+          <canvas id="clk4" class="CoolClock:Cold myClock"></canvas>
+          <input id="clock" >
+
+          <style type="text/css">
+            input {
+                vertical-align: center;
+                text-align: center;
+                width: 170px;   
+            }
+          </style>
+
+      </div>
+    </div>
+  </div>
 </div>
   </body>
 </html>
@@ -46,4 +62,53 @@
       google_ad_width = 468;
       google_ad_height = 60;
       //-->
+</script>
+<script>
+  var int=self.setInterval(function(){clock()},1000);
+  function start() {
+    int=self.setInterval(function(){clock()},1000);
+  }
+  function clock(){
+    var d=new Date();
+    var t=d.toLocaleTimeString();
+    document.getElementById("clock").value=t;
+  }
+</script>
+
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+     
+          setInterval( function() {
+          var seconds = new Date().getSeconds();
+          var sdegree = seconds * 6;
+          var srotate = "rotate(" + sdegree + "deg)";
+          
+          $("#sec").css({"-moz-transform" : srotate, "-webkit-transform" : srotate});
+              
+          }, 1000 );
+          
+     
+          setInterval( function() {
+          var hours = new Date().getHours();
+          var mins = new Date().getMinutes();
+          var hdegree = hours * 30 + (mins / 2);
+          var hrotate = "rotate(" + hdegree + "deg)";
+          
+          $("#hour").css({"-moz-transform" : hrotate, "-webkit-transform" : hrotate});
+              
+          }, 1000 );
+    
+    
+          setInterval( function() {
+          var mins = new Date().getMinutes();
+          var mdegree = mins * 6;
+          var mrotate = "rotate(" + mdegree + "deg)";
+          
+          $("#min").css({"-moz-transform" : mrotate, "-webkit-transform" : mrotate});
+              
+          }, 1000 );
+     
+    }); 
+
 </script>
